@@ -136,6 +136,31 @@ def post_facebook_message(fbid,message_text):
 			  }
 
 	} 
+	response_msg_image={
+				"recipient":{
+				    "id":fbid
+				  },
+				  "message":{
+				    "attachment":{
+				      "type":"template",
+				      "payload":{
+				        "template_type":"generic",
+				        "elements":[
+				          {
+				            "title":"color",
+				            "subtitle":matching_color['colour_name'][1:]
+				            "image_url":image_url,
+				            "buttons":[
+				              {
+				                "type":"element_share"
+				              }              
+				            ]
+				          }
+				        ]
+				      }
+				    }
+				  }
+				}
 	response_msg_image = json.dumps(response_msg_image)
 
 
