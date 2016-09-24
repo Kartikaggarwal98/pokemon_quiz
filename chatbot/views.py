@@ -279,19 +279,42 @@ def handle_quickreply(fbid,payload):
 	if payload.split(':')[0] == payload.split(':')[-1]:
 		 logg("COrrect Answer",symbol='-YES-')
 		 output_text = 'Correct Answer'
+		 giphy_image_url = giphysearch(keyword='Yes,right,correct')
 	else:
 		logg("Wrong Answer",symbol='-NO-')
 		output_text = 'Wrong answer'
-	output_text=giphysearch()
-	logg(output_text,symbol='--OT---')
+		giphy_image_url =giphysearch(keyword='NO,wrong,bad')
+
 	response_msg = json.dumps({"recipient":{"id":fbid}, 
 		"message":{"text":output_text}})
+
+	response_msg_image = {
+
+			"recipient":{
+			    "id":fbid
+			  },
+			  "message":{
+			    "attachment":{
+			      "type":"image",
+			      "payload":{
+			        "url": giphy_image_url
+			      }
+			    }
+			  }
+
+	} 
+	response_msg_image = json.dumps(response_msg_image)
 
 	status = requests.post(post_message_url, 
 		headers={"Content-Type": "application/json"},
 		data=response_msg)
+
+	status = requests.post(post_message_url, 
+		headers={"Content-Type": "application/json"},
+		data=response_msg_image)
 		
 	return
+
 
 class MyChatBotView(generic.View):
 	def get (self, request, *args, **kwargs):
