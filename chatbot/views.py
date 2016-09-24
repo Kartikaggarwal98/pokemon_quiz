@@ -52,7 +52,7 @@ def set_greeting_text():
 	logg(status.text,symbol='--GR--')
 
 def giphysearch(keyword="Yes"):
-	url='http://api.giphy.com/v1/gifs/search?q=%s&api_key=dc6zaT0xFJmzC'&(keyword)
+	url='http://api.giphy.com/v1/gifs/search?q=%s&api_key=dc6zaTOxFJmzC'&(keyword)
 	resp=requests.get(url=url).text
 	data=json.loads(resp)
 	random_int=random.randint(0,len(data[data])-1)
