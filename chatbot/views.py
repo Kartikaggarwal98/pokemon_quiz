@@ -23,15 +23,15 @@ pokemon_data = {"Bulbasaur":"http://img.pokemondb.net/artwork/bulbasaur.jpg","Iv
 def scrape_spreasheet_colorbro():
 	url='https://spreadsheets.google.com/feeds/list/1oxZcoHw1fz8Wzzpk7bafBXHqy6ie0u6L9tqE9XcqTug/od6/public/values?alt=json'
 	resp = requests.get(url=url)
-    data = json.loads(resp.text)
-    arr =[]
-    for entry in data['feed']['entry']:
-        print entry['gsx$colour_name']['$t']
-        d = dict(colour_name = entry['gsx$colour_name']['$t'],
-                colour_hex = entry['gsx$colour_hex']['$t']) 
-        arr.append(d)
+	data = json.loads(resp.text)
+	arr =[]
+	for entry in data['feed']['entry']:
+		print entry['gsx$colour_name']['$t']
+		d = dict(colour_name = entry['gsx$colour_name']['$t'],
+			colour_hex = entry['gsx$colour_hex']['$t']) 
+		arr.append(d)
 
-    return arr
+return arr
 
 def search_color(text):
 	for colour in scrape_spreasheet_colorbro():
