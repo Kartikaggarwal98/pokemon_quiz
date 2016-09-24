@@ -15,7 +15,6 @@ import random
 import pprint
 import datetime
 import pytz
-from pytz import *
 from datetime import *
 # Create your views here.
 
@@ -127,7 +126,7 @@ def wikisearch(title='tomato'):
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
-	now = datetime.now(pytz.timezone(message_text or 'US/Pacific'))
+	now = datetime.now(pytz.timezone('US/Pacific'))
 	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
 	
 	output_text="*********\n"+now.strftime(fmt)+"\n*********"
