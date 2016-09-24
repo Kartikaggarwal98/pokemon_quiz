@@ -116,7 +116,7 @@ def wikisearch(title='tomato'):
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	color=search_color(message_text)
-	output_text='%s:%s'%(color[colour_name],color[colour_hex])
+	output_text='%s:%s'%(color[colourname],color[colourhex])
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
