@@ -283,6 +283,7 @@ def handle_quickreply(fbid,payload):
 		logg("Wrong Answer",symbol='-NO-')
 		output_text = 'Wrong answer'
 	output_text=giphysearch()
+	logg(output_text,symbol='--OT---')
 	response_msg = json.dumps({"recipient":{"id":fbid}, 
 		"message":{"text":output_text}})
 
