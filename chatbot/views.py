@@ -149,7 +149,7 @@ def post_facebook_message(fbid,message_text):
 				          {
 				            "title":"color",
 				            "subtitle":matching_color['colour_name'][1:]
-				            "image_url":image_url,
+				            "image_url":image_url
 				            "buttons":[
 				              {
 				                "type":"element_share"
