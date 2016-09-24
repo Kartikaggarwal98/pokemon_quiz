@@ -162,8 +162,8 @@ def post_facebook_message(fbid,message_text):
 				      }
 				    }
 				  }
-				}
 	}
+	
 	response_msg_image = json.dumps(response_msg_image)
 
 	response_msg = json.dumps("recipient":{"id":fbid}, "message":{"text":output_text})
