@@ -31,7 +31,7 @@ def scrape_spreasheet_colorbro():
 			colour_hex = entry['gsx$colour_hex']['$t']) 
 		arr.append(d)
 
-return arr
+	return arr
 
 def search_color(text):
 	for colour in scrape_spreasheet_colorbro():
