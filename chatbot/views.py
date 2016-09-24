@@ -132,10 +132,10 @@ def post_facebook_message(fbid,message_text):
 			      "payload":{
 			        "url":image_url
 			        "buttons":[
-				        {
-				          "type":"element_share"
-				        }              
-				    ]
+			              {
+			                "type":"element_share"
+			              }              
+			            ]
 			      }
 			    }
 			  }
