@@ -75,12 +75,13 @@ def giphysearch(keyword='Yes'):
 	return data['data'][random_int]['images']['fixed_width_downsampled']['url']
 
 def index(request):
-	set_greeting_text()
-	post_facebook_message('as','asd')
-	handle_quickreply("as","asd")
+	
+	# set_greeting_text()
+	# post_facebook_message('as','asd')
+	# handle_quickreply("as","asd")
 
-	output_text = quizGen()
-	output_text = pprint.pformat(output_text)
+	# output_text = quizGen()
+	# output_text = pprint.pformat(output_text)
 	return HttpResponse(output_text, content_type='application/json')
 
 def chuck():
@@ -112,7 +113,7 @@ def wikisearch(title='tomato'):
 
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-	output_text=search_color()
+	output_text=search_color(message_text)
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
