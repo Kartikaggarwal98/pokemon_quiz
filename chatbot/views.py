@@ -26,9 +26,9 @@ def scrape_spreasheet_colorbro():
 	data = json.loads(resp.text)
 	arr =[]
 	for entry in data['feed']['entry']:
-		print entry['gsx$colour_name']['$t']
-		d = dict(colour_name = entry['gsx$colour_name']['$t'],
-			colour_hex = entry['gsx$colour_hex']['$t']) 
+		print entry['gsx$colourname']['$t']
+		d = dict(colour_name = entry['gsx$colourname']['$t'],
+			colour_hex = entry['gsx$colourhex']['$t']) 
 		arr.append(d)
 
 	return arr
@@ -75,14 +75,16 @@ def giphysearch(keyword='Yes'):
 	return data['data'][random_int]['images']['fixed_width_downsampled']['url']
 
 def index(request):
-	
+	search_string=request.GET.get('text')
+	output_text=search_color(search_string)
+	return HttpResponse(output_text['colour_name'],content_type='application/json')
 	# set_greeting_text()
 	# post_facebook_message('as','asd')
 	# handle_quickreply("as","asd")
 
 	# output_text = quizGen()
 	# output_text = pprint.pformat(output_text)
-	return HttpResponse(output_text, content_type='application/json')
+	#return HttpResponse(output_text, content_type='application/json')
 
 def chuck():
 	url = 'https://api.chucknorris.io/jokes/random'
