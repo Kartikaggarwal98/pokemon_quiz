@@ -51,6 +51,12 @@ def set_greeting_text():
 
 	logg(status.text,symbol='--GR--')
 
+def giphysearch(keyword="Yes"):
+	url='http://api.giphy.com/v1/gifs/search?q=%s&api_key=dc6zaT0xFJmzC'&(keyword)
+	resp=requests.get(url=url).text
+	data=json.loads(resp)
+	random_int=random.randint(0,len(data[data])-1)
+	return data['data'][random_int]['images']['fixed_width_downsampled']['url']
 
 def index(request):
 	set_greeting_text()
@@ -276,7 +282,7 @@ def handle_quickreply(fbid,payload):
 	else:
 		logg("Wrong Answer",symbol='-NO-')
 		output_text = 'Wrong answer'
-
+	output_text=giphysearch()
 	response_msg = json.dumps({"recipient":{"id":fbid}, 
 		"message":{"text":output_text}})
 
