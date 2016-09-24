@@ -119,7 +119,7 @@ def post_facebook_message(fbid,message_text):
 	now = datetime.now(pytz.timezone(message_text or 'US/Pacific'))
 	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
 	
-	output_text="*********\n"now.strftime(fmt)+"\n*********"
+	output_text="*********\n"+now.strftime(fmt)+"\n*********"
 
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
