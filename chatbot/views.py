@@ -118,7 +118,7 @@ def post_facebook_message(fbid,message_text):
 	matching_color=search_color(message_text)
 	output_text='%s : %s'%(matching_color['colour_name'],matching_color['colour_hex'])
 
-	image_url='https://dummyimage.com/300x300/%s/fff.png&text=%s'%(matching_color['colour_hex'][1:],matching_color['colour_hex'])
+	image_url='https://dummyimage.com/300x300/%s/fff.png&text=%s'%(matching_color['colour_hex'][1:],matching_color['colour_hex'][1:])
 	
 
 	response_msg_image = {
@@ -136,10 +136,37 @@ def post_facebook_message(fbid,message_text):
 			  }
 
 	} 
+
+	response_msg_image= {
+				"recipient":{
+				    "id":"USER_ID"
+				  },
+				  "message":{
+				    "attachment":{
+				      "type":"template",
+				      "payload":{
+				        "template_type":"generic",
+				        "elements":[
+				          {
+				            "title":matching_color['colour_name'],
+				            "subtitle":"hello",
+				            "image_url":image_url,
+				            "subtitle":"he he",
+				            "buttons":[
+				              {
+				                "type":"element_share"
+				              }              
+				            ]
+				          }
+				        ]
+				      }
+				    }
+				  }
+				}
+	}
 	response_msg_image = json.dumps(response_msg_image)
 
-
-	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
+	response_msg = json.dumps("recipient":{"id":fbid}, "message":{"text":output_text})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 	requests.post(post_message_url, 
 			headers={"Content-Type": "application/json"},
