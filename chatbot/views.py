@@ -121,26 +121,21 @@ def post_facebook_message(fbid,message_text):
 	image_url='https://dummyimage.com/300x300/%s/fff.png&text=%s'%(matching_color['colour_hex'][1:],matching_color['colour_hex'])
 	
 
-	response_msg_image = {
+	# response_msg_image = {
 
-			"recipient":{
-			    "id":fbid
-			  },
-			  "message":{
-			    "attachment":{
-			      "type":"image",
-			      "payload":{
-			        "url":image_url
-			        "buttons":[
-			              {
-			                "type":"element_share"
-			              }              
-			            ]
-			      }
-			    }
-			  }
+	# 		"recipient":{
+	# 		    "id":fbid
+	# 		  },
+	# 		  "message":{
+	# 		    "attachment":{
+	# 		      "type":"image",
+	# 		      "payload":{
+	# 		        "url":image_url
+	# 		      }
+	# 		    }
+	# 		  }
 
-	} 
+	# } 
 	response_msg_image={
 				"recipient":{
 				    "id":fbid
