@@ -13,7 +13,10 @@ import requests
 import re
 import random
 import pprint
-import datetime,pytz
+import datetime
+import pytz
+from pytz import *
+from datetime import *
 # Create your views here.
 
 VERIFY_TOKEN = '7thseptember2016'
@@ -76,9 +79,16 @@ def giphysearch(keyword='Yes'):
 	return data['data'][random_int]['images']['fixed_width_downsampled']['url']
 
 def index(request):
-	search_string=request.GET.get('text')
-	output_text=search_color(search_string)
-	return HttpResponse(output_text['colour_hex'],content_type='application/json')
+	now = datetime.now(pytz.timezone('US/Pacific'))
+	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
+	output_text="*********\n"+now.strftime(fmt)+"\n*********"
+	return HttpResponse(output_text,content_type='application/json')
+
+
+	# search_string=request.GET.get('text')
+	# output_text=search_color(search_string)
+	# return HttpResponse(output_text['colour_hex'],content_type='application/json')
+
 	# set_greeting_text()
 	# post_facebook_message('as','asd')
 	# handle_quickreply("as","asd")
