@@ -14,10 +14,10 @@ import re
 import random
 import pprint
 import datetime
-# import pytz
-# from datetime import *
-# from geopy import *
-# from tzwhere import tzwhere
+import pytz
+from datetime import *
+from geopy import *
+from tzwhere import tzwhere
 # Create your views here.
 
 VERIFY_TOKEN = '7thseptember2016'
@@ -139,19 +139,18 @@ def wikisearch(title='tomato'):
 def post_facebook_message_new(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
-	# geolocation=Nominatim()
-	# location=geolocation.geocode("nyc")
-	# address=str(location.address)
-	# latitude=int(location.latitude)
-	# longitude=int(location.longitude)
+	geolocation=Nominatim()
+	location=geolocation.geocode(message_text or "nyc")
+	address=str(location.address)
+	latitude=int(location.latitude)
+	longitude=int(location.longitude)
 
-	# tz=tzwhere.tzwhere()
-	# time_zone=tz.tzNameAt(latitude,longitude)
-	# now = datetime.now(pytz.timezone(time_zone))
-	# fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
+	tz=tzwhere.tzwhere()
+	time_zone=tz.tzNameAt(latitude,longitude)
+	now = datetime.now(pytz.timezone(time_zone))
+	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
 
-	# output_text="*********\n"+now.strftime(fmt)+"\n*********"+"\nlocation:"+address+"\n"+time_zone+" "+str(latitude)+","+str(longitude)
-	output_text="hello"
+	output_text="*********\n"+now.strftime(fmt)+"\n*********"+"\nlocation:"+address+"\n"+time_zone+" "+str(latitude)+","+str(longitude)
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
@@ -474,7 +473,7 @@ class MyChatBotView(generic.View):
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']
-					post_facebook_message_old(sender_id,message_text) 
+					post_facebook_message_new(sender_id,message_text) 
 				except Exception as e:
 					logg(e,symbol='-147-')
 
