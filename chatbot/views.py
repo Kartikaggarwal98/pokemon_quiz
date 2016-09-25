@@ -139,11 +139,19 @@ def wikisearch(title='tomato'):
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
-	now = datetime.now(pytz.timezone('US/Pacific'))
-	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
-	
-	output_text="*********\n"+now.strftime(fmt)+"\n*********"
+	geolocation=Nominatim()
+	location=geolocation.geocode(message_text)
+	address=str(location.address)
+	latitude=int(location.latitude)
+	longitude=int(location.longitude)
 
+	tz=tzwhere.tzwhere()
+	time_zone=tz.tzNameAt(latitude,longitude)
+	now = datetime.now(pytz.timezone(time_zone))
+	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
+
+	output_text="*********\n"+now.strftime(fmt)+"\n*********"+"\nlocation:"+address+"\n"+time_zone+" "+str(latitude)+","+str(longitude)
+	
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
