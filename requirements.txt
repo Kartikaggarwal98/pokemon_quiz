@@ -9,4 +9,5 @@ requests==2.10.0
 virtualenv==15.0.3
 youtube-dl==2016.8.12
 geopy==1.11.0
+tzwhere==2.3
 
