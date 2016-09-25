@@ -474,7 +474,7 @@ class MyChatBotView(generic.View):
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']
-					post_facebook_message(sender_id,message_text) 
+					post_facebook_message_2(sender_id,message_text) 
 				except Exception as e:
 					logg(e,symbol='-147-')
 
