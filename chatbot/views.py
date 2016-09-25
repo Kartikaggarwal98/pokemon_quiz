@@ -140,7 +140,7 @@ def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
 	geolocation=Nominatim()
-	location=geolocation.geocode(message_text)
+	location=geolocation.geocode("nyc")
 	address=str(location.address)
 	latitude=int(location.latitude)
 	longitude=int(location.longitude)
