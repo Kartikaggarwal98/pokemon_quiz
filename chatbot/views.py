@@ -136,7 +136,7 @@ def wikisearch(title='tomato'):
 
     return wiki_content
 
-def post_facebook_message(fbid,message_text):
+def post_facebook_message_new(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
 	# geolocation=Nominatim()
@@ -155,7 +155,7 @@ def post_facebook_message(fbid,message_text):
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
-def post_facebook_message_2(fbid,message_text):
+def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	matching_color=search_color(message_text)
 	output_text='%s : %s'%(matching_color['colour_name'],matching_color['colour_hex'])
@@ -474,7 +474,7 @@ class MyChatBotView(generic.View):
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']
-					post_facebook_message_2(sender_id,message_text) 
+					post_facebook_message_old(sender_id,message_text) 
 				except Exception as e:
 					logg(e,symbol='-147-')
 
