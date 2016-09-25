@@ -14,10 +14,10 @@ import re
 import random
 import pprint
 import datetime
-import pytz
-from datetime import *
-from geopy import *
-from tzwhere import tzwhere
+# import pytz
+# from datetime import *
+# from geopy import *
+# from tzwhere import tzwhere
 # Create your views here.
 
 VERIFY_TOKEN = '7thseptember2016'
