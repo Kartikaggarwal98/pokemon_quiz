@@ -16,6 +16,8 @@ import pprint
 import datetime
 import pytz
 from datetime import *
+from geopy import *
+from tzwhere import tzwhere
 # Create your views here.
 
 VERIFY_TOKEN = '7thseptember2016'
@@ -78,9 +80,20 @@ def giphysearch(keyword='Yes'):
 	return data['data'][random_int]['images']['fixed_width_downsampled']['url']
 
 def index(request):
-	now = datetime.now(pytz.timezone('US/Pacific'))
+	search_string=request.GET.get('text')
+	geolocation=Nominatim()
+	location=geolocation.geocode(search_string)
+	address=str(location.address)
+	latitude=int(location.latitude)
+	longitude=int(location.longitude)
+
+	tz=tzwhere.tzwhere()
+	time_zone=tz.tzNameAt(latitude,longitude)
+	now = datetime.now(pytz.timezone(time_zone))
 	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
-	output_text="*********\n"+now.strftime(fmt)+"\n*********"
+
+	output_text="*********\n"+now.strftime(fmt)+"\n*********"+"\nlocation:"+address+"\n"+time_zone+" "+str(latitude)+","+str(longitude)
+
 	return HttpResponse(output_text,content_type='application/json')
 
 
