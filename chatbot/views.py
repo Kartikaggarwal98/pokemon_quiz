@@ -18,6 +18,8 @@ import pytz
 from datetime import *
 from geopy import *
 from tzwhere import tzwhere
+from shapely import *
+import 	shapely
 # Create your views here.
 
 VERIFY_TOKEN = '7thseptember2016'
@@ -87,7 +89,7 @@ def index(request):
 	latitude=int(location.latitude)
 	longitude=int(location.longitude)
 
-	tz=tzwhere.tzwhere()
+	tz=tzwhere.tzwhere(shapely=True)
 	time_zone=tz.tzNameAt(latitude,longitude)
 	now = datetime.now(pytz.timezone(time_zone))
 	fmt="Date: %d-%m-%Y\nTime: %H:%M:%S"
@@ -438,7 +440,6 @@ class MyChatBotView(generic.View):
 			return HttpResponse(self.request.GET['hub.challenge'])
 		else:
 			return HttpResponse('Oops invalid token')
-
 	@method_decorator(csrf_exempt)
 	def dispatch(self, request, *args, **kwargs):
 		return generic.View.dispatch(self, request, *args, **kwargs)
@@ -458,7 +459,7 @@ class MyChatBotView(generic.View):
 					else:
 						pass
 				except Exception as e:
-					logg(e,symbol='-140-')
+					logg(e,symbol='-140-')''
 
 				try:
 					if 'quick_reply' in message['message']:
