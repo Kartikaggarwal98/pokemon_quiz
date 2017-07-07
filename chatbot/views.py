@@ -18,8 +18,7 @@ import pytz
 from datetime import *
 from geopy import *
 from tzwhere import tzwhere
-from shapely import *
-import 	shapely
+
 # Create your views here.
 
 VERIFY_TOKEN = '7thseptember2016'
