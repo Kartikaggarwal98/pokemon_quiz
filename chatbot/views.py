@@ -473,7 +473,7 @@ class MyChatBotView(generic.View):
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']
-					post_facebook_message_new(sender_id,message_text) 
+					post_facebook_message_old(sender_id,message_text) 
 				except Exception as e:
 					logg(e,symbol='-147-')
 
