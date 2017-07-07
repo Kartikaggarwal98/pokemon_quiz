@@ -459,7 +459,7 @@ class MyChatBotView(generic.View):
 					else:
 						pass
 				except Exception as e:
-					logg(e,symbol='-140-')''
+					logg(e,symbol='-140-')
 
 				try:
 					if 'quick_reply' in message['message']:
