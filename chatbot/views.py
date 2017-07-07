@@ -364,9 +364,9 @@ def post_facebook_message_old(fbid,message_text):
 
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
-	requests.post(post_message_url, 
-			headers={"Content-Type": "application/json"},
-			data=response_msg_image)
+	#requests.post(post_message_url, 
+	# 		headers={"Content-Type": "application/json"},
+	# 		data=response_msg_image)
 
 	requests.post(post_message_url, 
 			headers={"Content-Type": "application/json"},
